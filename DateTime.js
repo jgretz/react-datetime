@@ -42,6 +42,7 @@ var Datetime = createClass({
 			onBlur: nof,
 			onChange: nof,
 			timeFormat: true,
+			displayFormat: undefined,
 			timeConstraints: {},
 			dateFormat: true,
 			strictParsing: true,
@@ -69,7 +70,7 @@ var Datetime = createClass({
 		;
 
 		if ( date && typeof date === 'string' )
-			selectedDate = this.localMoment( date, formats.datetime );
+			selectedDate = this.localMoment( date, props.displayFormat || formats.datetime );
 		else if ( date )
 			selectedDate = this.localMoment( date );
 
@@ -84,7 +85,7 @@ var Datetime = createClass({
 		updateOn = this.getUpdateOn(formats);
 
 		if ( selectedDate )
-			inputValue = selectedDate.format(formats.datetime);
+			inputValue = selectedDate.format(props.displayFormat || formats.datetime);
 		else if ( date.isValid && !date.isValid() )
 			inputValue = '';
 		else
